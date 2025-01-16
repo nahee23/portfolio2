@@ -2,21 +2,36 @@ import { TbBowlSpoon } from "react-icons/tb";
 import { Link } from "react-router-dom";
 import PropTypes from "prop-types";
 import React from "react";
+import { useFood } from "../../context/FoodContext";
 
 function Navbar({ title }) {
+  const { setCategory2 } = useFood();
+
+  const handleHomeClick = () => {
+    setCategory2(null);
+  };
+
   return (
     <nav className="navbar mb-12 shadow-lg bg-primary text-base-100">
       <div className="container mx-auto">
         <div className="flex-none px-2 mx-2">
           <TbBowlSpoon className="inline pr-2 text-3xl" />
-          <Link href="/" className="text-lg font-bold align-middle">
+          <Link
+            href="/"
+            className="text-lg font-bold align-middle"
+            onClick={handleHomeClick}
+          >
             {title}
           </Link>
         </div>
 
         <div className="flex-1 px-2 mx-2">
           <div className="flex justify-end">
-            <Link href="/" className="btn btn-ghost btn-sm rounded-btn">
+            <Link
+              href="/"
+              className="btn btn-ghost btn-sm rounded-btn"
+              onClick={handleHomeClick}
+            >
               HOME
             </Link>
             <Link href="/about" className="btn btn-ghost btn-sm rounded-btn">

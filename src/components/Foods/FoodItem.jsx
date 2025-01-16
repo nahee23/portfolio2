@@ -13,6 +13,7 @@ function FoodItem({ food }) {
         </div>
         <div>
           <h2 className="card-title">{food.title}</h2>
+          <p>{food.address}</p>
           {/* <Link
             className="text-base-content text-opacity-40"
             to={`/food/${food.login}`}
