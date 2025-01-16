@@ -1,72 +1,87 @@
-import React, { useState } from "react";
+import React from "react";
 
-function FoodSearch() {
-  const [text, setText] = useState("");
-  const handleChange = (e) => {
-    setText(e.target.value);
-  };
-  const handleSubmit = (e) => {
-    e.preventDefault();
+function FoodSearch({
+  selectedRegion, // 현재 선택된 지역
+  setSelectedRegion, // 지역 선택을 업데이트하는 함수
+  searchKeyword, // 현재 입력된 검색 키워드
+  setSearchKeyword, // 검색 키워드를 업데이트하는 함수
+  handleSearchSubmit, // 검색 제출 핸들러
+  handleClearFilters, // 필터 초기화 핸들러
+}) {
+  // 지역 리스트
+  const regions = [
+    "서울특별시",
+    "부산광역시",
+    "경기도",
+    "대구광역시",
+    "울산광역시",
+    "경상남도",
+    "경상북도",
+    "인천광역시",
+    "전라남도",
+    "전라북도",
+    "광주광역시",
+    "충청남도",
+    "충청북도",
+    "강원도",
+    "세종광역시",
+    "대전광역시",
+    "제주특별자치도",
+  ];
 
-    if (text === "") {
-      alert("내용을 입력해주세요");
-    } else {
-      //유저찾기
-      console.log(text);
-      setText("");
-    }
+  // 지역 버튼 클릭 핸들러
+  const handleRegionClick = (region) => {
+    setSelectedRegion(region); // 지역 상태 업데이트
+    handleSearchSubmit(); // 이벤트 객체 없이 호출
   };
+
   return (
-    <div
-      className="grid grid-cols-1 xl:grid-cols-2 
-              lg:grid-cols-2 md:grid-cols-2 mb-8 gap-8"
-    >
-      <div className="flex justify-center">
-        <form onSubmit={handleSubmit}>
+    <div className="flex flex-col items-center mb-8 gap-8">
+      {/* 검색 및 지역 선택 */}
+      <div className="flex justify-center w-full">
+        <form
+          onSubmit={(e) => {
+            e.preventDefault();
+            handleSearchSubmit();
+          }}
+          className="w-full max-w-2xl"
+        >
           <div className="form-control">
             <div className="relative flex items-center space-x-4">
-              <select className="select select-bordered w-1/3 max-w-xs">
-                <option disabled selected>
-                  지역
-                </option>
-                <option>서울특별시</option>
-                <option>부산광역시</option>
-                <option>경기도</option>
-                <option>대구광역시</option>
-                <option>울산광역시</option>
-                <option>경상남도</option>
-                <option>경상북도</option>
-                <option>인천광역시</option>
-                <option>전라남도</option>
-                <option>전라북도</option>
-                <option>광주광역시</option>
-                <option>충청남도</option>
-                <option>충청북도</option>
-                <option>강원도</option>
-                <option>세종광역시</option>
-                <option>대전광역시</option>
-                <option>제주특별자치도</option>
-              </select>
+              {/* 검색 입력 */}
               <input
                 type="text"
-                className="w-2/3 pr-40 bg-gray-200 input input-lg text-black"
+                className="w-full pr-40 bg-gray-200 input input-lg text-black"
                 placeholder="Search"
-                value={text}
-                onChange={handleChange}
+                value={searchKeyword} // 현재 검색 키워드 상태
+                onChange={(e) => setSearchKeyword(e.target.value)} // 상태 업데이트
               />
 
+              {/* 필터 초기화 버튼 */}
               <button
-                type="submit"
-                className="absolute top-0 right-0 rounded-l-none w-36 btn btn-lg"
+                onClick={handleClearFilters} // 필터 초기화 핸들러 호출
+                className="rounded-1 w-36 btn btn-lg ml-4"
               >
-                Go
+                Clear
               </button>
+            </div>
+            <div className="flex flex-wrap mt-4 space-x-2 justify-center">
+              {regions.map((region) => (
+                <button
+                  key={region}
+                  onClick={() => handleRegionClick(region)} // 지역 선택
+                  className={`px-3 py-1 border rounded m-2 ${
+                    selectedRegion === region
+                      ? "bg-blue-500 text-white"
+                      : "bg-gray-200 hover:bg-gray-300"
+                  }`}
+                >
+                  {region}
+                </button>
+              ))}
             </div>
           </div>
         </form>
-      </div>
-      <div>
-        <button className="btn btn-ghost btn-lg">Clear</button>
       </div>
     </div>
   );
