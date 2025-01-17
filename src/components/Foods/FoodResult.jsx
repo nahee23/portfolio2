@@ -2,10 +2,13 @@ import React, { useState } from "react";
 import { useFood } from "../../context/FoodContext";
 import Spinner from "../layout/Spinner";
 import FoodItem from "./FoodItem";
+import MapModal from "./MapModal";
 
 function FoodResult({ selectedRegion, searchKeyword }) {
   const { foods, loading, category2, setCategory2 } = useFood(); // Context에서 상태 가져오기
   const [currentPage, setCurrentPage] = useState(1); // 현재 페이지
+  const [selectedCoordinates, setSelectedCoordinates] = useState(null); // 선택된 좌표
+  const [isModalOpen, setIsModalOpen] = useState(false); // 모달 상태
   const itemsPerPage = 16; // 페이지당 항목 수
   const maxPageNumbersToShow = 5; // 한 번에 표시할 페이지 번호의 최대 수
 
@@ -84,13 +87,28 @@ function FoodResult({ selectedRegion, searchKeyword }) {
 
     return pages;
   };
+  const handleCardClick = (coordinates) => {
+    setSelectedCoordinates(coordinates);
+    setIsModalOpen(true);
+  };
+
+  const closeModal = () => {
+    setIsModalOpen(false);
+  };
 
   return (
     <>
       <div className="grid grid-cols-1 gap-8 xl:grid-cols-4 lg:grid-cols-3 md:grid-cols-2">
         {currentFoods.map((food) => (
-          <FoodItem key={food.id} food={food} />
+          <FoodItem
+            key={food.id}
+            food={food}
+            onClick={() => handleCardClick(food.coordinates)}
+          />
         ))}
+        {isModalOpen && selectedCoordinates && (
+          <MapModal coordinates={selectedCoordinates} onClose={closeModal} />
+        )}
       </div>
       {/* 페이지 네비게이션 */}
       <div className="flex flex-col items-center mt-4">
