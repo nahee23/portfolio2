@@ -1,45 +1,21 @@
 {
   "env": {
     "browser": true,
-    "es2021": true,
-    "node": true
+    "es2021": true
   },
-  "extends": [
-    "eslint:recommended",
-    "plugin:react/recommended",
-    "plugin:react-hooks/recommended",
-    "plugin:jsx-a11y/recommended",
-    "plugin:import/errors",
-    "plugin:import/warnings"
-  ],
+  "extends": ["eslint:recommended", "plugin:react/recommended"],
   "parserOptions": {
+    "ecmaFeatures": {
+      "jsx": true
+    },
     "ecmaVersion": 12,
     "sourceType": "module"
   },
-  "plugins": ["react", "react-hooks", "jsx-a11y", "import"],
-  "settings": {
-    "react": {
-      "version": "detect"
-    }
+  "plugins": ["react"],
+  "rules": {
+    // 여기에 추가적인 규칙을 설정할 수 있습니다.
   },
   "globals": {
-    "kakao": "readonly" // 전역 객체로 kakao 정의
-  },
-  "rules": {
-    "no-unused-vars": "warn", // 사용하지 않는 변수를 경고
-    "no-console": "off", // console.log 허용
-    "react/prop-types": "off", // PropTypes 검사를 끄기
-    "react/react-in-jsx-scope": "off", // React 자동 임포트 (React 17+)
-    "jsx-a11y/anchor-is-valid": "warn", // 링크 유효성 검사 경고
-    "import/no-unresolved": "error", // 잘못된 import 경로를 에러로 표시
-    "import/named": "error" // 잘못된 named import 에러
-  },
-  {
-    "overrides": [
-      {
-        "files": ["*.js", "*.jsx", "*.ts", "*.tsx"],
-        "rules": {}
-      }
-    ]
+    "kakao": "readonly"
   }
 }
