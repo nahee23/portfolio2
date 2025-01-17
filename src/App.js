@@ -5,6 +5,7 @@ import About from "./pages/About";
 import NotFound from "./pages/NotFound";
 import Home from "./pages/Home";
 import { FoodProvider } from "./context/FoodContext";
+import React from "react";
 
 function App() {
   return (

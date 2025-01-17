@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from "prop-types";
 
 function FoodSearch({
   selectedRegion, // 현재 선택된 지역
@@ -86,5 +87,13 @@ function FoodSearch({
     </div>
   );
 }
+FoodSearch.propTypes = {
+  selectedRegion: PropTypes.string.isRequired,
+  setSelectedRegion: PropTypes.func.isRequired,
+  searchKeyword: PropTypes.string.isRequired,
+  setSearchKeyword: PropTypes.func.isRequired,
+  handleSearchSubmit: PropTypes.func.isRequired,
+  handleClearFilters: PropTypes.func.isRequired,
+};
 
 export default FoodSearch;

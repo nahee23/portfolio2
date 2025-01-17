@@ -3,6 +3,7 @@ import FoodMain from "../components/Foods/FoodMain";
 import FoodResult from "../components/Foods/FoodResult";
 import FoodSearch from "../components/Foods/FoodSearch";
 import { useFood } from "../context/FoodContext";
+import React from "react";
 
 function Home() {
   const { category2 } = useFood(); // 선택된 음식 상태 가져오기

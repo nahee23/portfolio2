@@ -3,6 +3,7 @@ import { useFood } from "../../context/FoodContext";
 import Spinner from "../layout/Spinner";
 import FoodItem from "./FoodItem";
 import MapModal from "./MapModal";
+import PropTypes from "prop-types";
 
 function FoodResult({ selectedRegion, searchKeyword }) {
   const { foods, loading, category2, setCategory2 } = useFood(); // Context에서 상태 가져오기
@@ -172,5 +173,9 @@ function FoodResult({ selectedRegion, searchKeyword }) {
     </>
   );
 }
+FoodResult.propTypes = {
+  selectedRegion: PropTypes.string,
+  searchKeyword: PropTypes.string,
+};
 
 export default FoodResult;

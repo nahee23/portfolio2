@@ -1,4 +1,5 @@
 import React, { createContext, useState, useContext, useEffect } from "react";
+import PropTypes from "prop-types";
 
 // Context 생성
 const FoodContext = createContext();
@@ -45,6 +46,9 @@ export const FoodProvider = ({ children }) => {
       {children}
     </FoodContext.Provider>
   );
+};
+FoodProvider.propTypes = {
+  children: PropTypes.node.isRequired,
 };
 
 // Custom Hook
